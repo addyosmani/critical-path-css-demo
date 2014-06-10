@@ -95,6 +95,35 @@ gulp.task('serve', ['connect'], function () {
     require('opn')('http://localhost:9000');
 });
 
+
+/**
+ * Notes
+ * 
+ * This will build your project, go back and run a version of
+ * it against using connect so we can scrape your CSS for styles
+ * that are critical and then write them back out to dist. We then
+ * try to inline these styles in your dist/index.html file. I've 
+ * commented this out for now.
+ * 
+ * The penthouse task should ideally be scraping the input
+ * markup for <link rel> instances, parsing out the CSS and
+ * generating its corpus based on that. That the author has
+ * decided outright not to support this makes things a little
+ * trickier as in build, you need to pre-create your final CSS
+ * before you can pass it through to the task. 
+ *
+ * I may just create a module to handle that instead to make
+ * it easier to consume. Penthouse otherwise supports setting
+ * the width and height of your ideal critical path viewport
+ * and that works fine. 
+ *
+ * The challenging part of this all is actually inlining. All of
+ * the gulp tasks I could fine that handle this appear to inline
+ * directly inside the markup, rather than inlining styles as a 
+ * single <style> tag in the document body. Keep searching whether
+ * there is a) a way to do this with Juice or b) if a task exists
+ * that lets you do this. 
+ */
 gulp.task('critical', ['build', 'connect'], function () {
     penthouse({
         url : 'http://localhost:9000',
@@ -106,7 +135,19 @@ gulp.task('critical', ['build', 'connect'], function () {
         // Overwrite final CSS
         fs.writeFile('dist/styles/main.css', criticalCss, function (err) {
           if (err) return console.log(err);
-          process.exit(0);
+
+            // Inline critical path css
+            //gulp.src('dist/index.html')
+            //    .pipe($.inlineCss({
+            //        applyStyleTags: true,
+            //        applyLinkTags: true,
+            //        preserveMediaQueries: true
+            //    }))
+            //    .pipe(gulp.dest('dist'))
+            //    .pipe($.size());
+            // Yay, we get to mix callbacks and piped streams.
+            // Fix this stuff and make sure we exit okay. 
+            process.exit(0);
         });       
     });    
 });

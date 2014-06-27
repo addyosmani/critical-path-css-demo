@@ -2,7 +2,6 @@
 
 var gulp = require('gulp');
 var oust = require('oust');
-var juice = require('gulp-juice');
 
 // load plugins
 var $ = require('gulp-load-plugins')();
@@ -107,6 +106,10 @@ gulp.task('critical', ['build'], function () {
     // already built to the 'dist' location
     var source = 'dist/index.html';
 
+    // Specify the target CSS file, used prior
+    // to inlining CSS.
+    var destCSS = 'dist/styles/main.css';
+
     // Oust extracts your stylesheets
     oust({ src: source }, function (hrefs){
         // Penthouse then determines your critical
@@ -117,14 +120,13 @@ gulp.task('critical', ['build'], function () {
             // What viewports do you care about?
             width : 384,   // viewport width
             height : 640   // viewport height
-        }, function(err, criticalCss) {
-            // console.log(err);
-            // console.log(criticalCss);
-            
+        }, function(err, criticalCSS) {
+
             // Overwrite final CSS with critical path CSS
-            fs.writeFile('dist/styles/main.css', criticalCss, function (err) {
+            fs.writeFile(destCSS, criticalCSS, function (err) {
               if (err) return console.log(err);
-                process.exit(0);
+              gulp.start('inline');
+              // process.exit(0);
             });       
         }); 
     });
@@ -132,13 +134,15 @@ gulp.task('critical', ['build'], function () {
 });
 
 // Inline critical path CSS
-// Note: this doesn't work well yet.
 gulp.task('inline', function () {
-    gulp.src('dist/index.html')
-        .pipe(juice({}))
-        .pipe(gulp.dest('dist'))
-        .pipe($.size());    
+    return gulp.src('dist/index.html')
+      .pipe($.inline({
+        base: 'dist/',
+      }))
+      .pipe(gulp.dest('dist/'))
+      .pipe($.size());    
 });
+
 
 // inject bower components
 gulp.task('wiredep', function () {

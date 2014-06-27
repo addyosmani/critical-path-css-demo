@@ -2,6 +2,7 @@
 // generated on 2014-06-10 using generator-gulp-webapp 0.1.0
 
 var gulp = require('gulp');
+var oust = require('oust');
 
 // load plugins
 var $ = require('gulp-load-plugins')();
@@ -9,6 +10,8 @@ var $ = require('gulp-load-plugins')();
 // load penthouse
 var penthouse = require('penthouse');
 var fs = require('fs');
+var cheerio = require('cheerio');
+var path = require('path');
 
 gulp.task('styles', function () {
     return gulp.src('app/styles/main.css')
@@ -96,60 +99,45 @@ gulp.task('serve', ['connect'], function () {
 });
 
 
-/**
- * Notes
- * 
- * This will build your project, go back and run a version of
- * it against using connect so we can scrape your CSS for styles
- * that are critical and then write them back out to dist. We then
- * try to inline these styles in your dist/index.html file. I've 
- * commented this out for now.
- * 
- * The penthouse task should ideally be scraping the input
- * markup for <link rel> instances, parsing out the CSS and
- * generating its corpus based on that. That the author has
- * decided outright not to support this makes things a little
- * trickier as in build, you need to pre-create your final CSS
- * before you can pass it through to the task. 
- *
- * I may just create a module to handle that instead to make
- * it easier to consume. Penthouse otherwise supports setting
- * the width and height of your ideal critical path viewport
- * and that works fine. 
- *
- * The challenging part of this all is actually inlining. All of
- * the gulp tasks I could fine that handle this appear to inline
- * directly inside the markup, rather than inlining styles as a 
- * single <style> tag in the document body. Keep searching whether
- * there is a) a way to do this with Juice or b) if a task exists
- * that lets you do this. 
- */
-gulp.task('critical', ['build', 'connect'], function () {
-    penthouse({
-        url : 'http://localhost:9000',
-        css : 'dist/styles/main.css',
-        width : 384,   // viewport width
-        height : 640   // viewport height
-    }, function(err, criticalCss) {
-        console.log(err);
-        // Overwrite final CSS
-        fs.writeFile('dist/styles/main.css', criticalCss, function (err) {
-          if (err) return console.log(err);
+gulp.task('critical', ['build'], function () {
 
-            // Inline critical path css
-            //gulp.src('dist/index.html')
-            //    .pipe($.inlineCss({
-            //        applyStyleTags: true,
-            //        applyLinkTags: true,
-            //        preserveMediaQueries: true
-            //    }))
-            //    .pipe(gulp.dest('dist'))
-            //    .pipe($.size());
-            // Yay, we get to mix callbacks and piped streams.
-            // Fix this stuff and make sure we exit okay. 
-            process.exit(0);
-        });       
-    });    
+    // Specify final HTML
+    // In this case we've already built to the location
+    var source = 'dist/index.html';
+
+    // Oust extracts your stylesheets
+    oust({ src: source }, function (hrefs){
+        // Penthouse uses this info to determine
+        // your critical path CSS.
+        penthouse({
+            url : source,
+            css : 'dist/' + hrefs[0],
+            // What viewports do you care about?
+            width : 384,   // viewport width
+            height : 640   // viewport height
+        }, function(err, criticalCss) {
+            // console.log(err);
+            // console.log(criticalCss);
+            
+            // Overwrite final CSS with critical path CSS
+            fs.writeFile('dist/styles/main.css', criticalCss, function (err) {
+              if (err) return console.log(err);
+
+                // Inline critical path css
+                //gulp.src('dist/index.html')
+                //    .pipe($.inlineCss({
+                //        applyStyleTags: true,
+                //        applyLinkTags: true,
+                //        preserveMediaQueries: true
+                //    }))
+                //    .pipe(gulp.dest('dist'))
+                //    .pipe($.size());
+
+                process.exit(0);
+            });       
+        }); 
+    });
+
 });
 
 // inject bower components

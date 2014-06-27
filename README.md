@@ -1,7 +1,7 @@
 critical-path-css-demo
 ======================
 
-Generate and inline critical-path CSS example using [Oust](http://github.com/addyosmani/oust], [Penthouse](https://github.com/pocketjoso/penthouse) and [gulp-inline](https://github.com/ashaffer/gulp-inline/).
+Generate and inline critical-path CSS example using [Oust](http://github.com/addyosmani/oust), [Penthouse](https://github.com/pocketjoso/penthouse) and [gulp-inline](https://github.com/ashaffer/gulp-inline/).
 
 ### Why is critical-path CSS important?
 

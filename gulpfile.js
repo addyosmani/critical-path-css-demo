@@ -1,8 +1,8 @@
 'use strict';
-// generated on 2014-06-10 using generator-gulp-webapp 0.1.0
 
 var gulp = require('gulp');
 var oust = require('oust');
+var juice = require('gulp-juice');
 
 // load plugins
 var $ = require('gulp-load-plugins')();
@@ -99,16 +99,18 @@ gulp.task('serve', ['connect'], function () {
 });
 
 
+// I treat critical path CSS optimization as a 
+// post-processing step.
 gulp.task('critical', ['build'], function () {
 
-    // Specify final HTML
-    // In this case we've already built to the location
+    // Specify final HTML. In this case we've 
+    // already built to the 'dist' location
     var source = 'dist/index.html';
 
     // Oust extracts your stylesheets
     oust({ src: source }, function (hrefs){
-        // Penthouse uses this info to determine
-        // your critical path CSS.
+        // Penthouse then determines your critical
+        // path CSS
         penthouse({
             url : source,
             css : 'dist/' + hrefs[0],
@@ -122,22 +124,20 @@ gulp.task('critical', ['build'], function () {
             // Overwrite final CSS with critical path CSS
             fs.writeFile('dist/styles/main.css', criticalCss, function (err) {
               if (err) return console.log(err);
-
-                // Inline critical path css
-                //gulp.src('dist/index.html')
-                //    .pipe($.inlineCss({
-                //        applyStyleTags: true,
-                //        applyLinkTags: true,
-                //        preserveMediaQueries: true
-                //    }))
-                //    .pipe(gulp.dest('dist'))
-                //    .pipe($.size());
-
                 process.exit(0);
             });       
         }); 
     });
 
+});
+
+// Inline critical path CSS
+// Note: this doesn't work well yet.
+gulp.task('inline', function () {
+    gulp.src('dist/index.html')
+        .pipe(juice({}))
+        .pipe(gulp.dest('dist'))
+        .pipe($.size());    
 });
 
 // inject bower components

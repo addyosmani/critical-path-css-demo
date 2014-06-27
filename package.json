@@ -26,7 +26,8 @@
     "penthouse": "^0.2.0",
     "gulp-inline-css": "^0.2.7",
     "cheerio": "^0.17.0",
-    "oust": "0.0.2"
+    "oust": "0.0.1",
+    "gulp-juice": "0.0.2"
   },
   "engines": {
     "node": ">=0.10.0"

@@ -34,4 +34,4 @@ The complete (critical-path) build can be run with:
 gulp critical
 ```
 
-This performs the normal build, then generates and inlines critical-path CSS for the page, taking the CSS down to 4KB.
+This performs the normal build, then generates and inlines critical-path CSS for the page, taking the total size of HTML + CSS in index.html down to 7KB.

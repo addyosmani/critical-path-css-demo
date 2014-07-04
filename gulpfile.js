@@ -1,16 +1,11 @@
 'use strict';
 
 var gulp = require('gulp');
-var oust = require('oust');
+var critical = require('critical');
+var path = require('path');
 
 // load plugins
 var $ = require('gulp-load-plugins')();
-
-// load penthouse
-var penthouse = require('penthouse');
-var fs = require('fs');
-var cheerio = require('cheerio');
-var path = require('path');
 
 gulp.task('styles', function () {
     return gulp.src('app/styles/main.css')
@@ -97,52 +92,19 @@ gulp.task('serve', ['connect'], function () {
     require('opn')('http://localhost:9000');
 });
 
-
-// I treat critical path CSS optimization as a 
-// post-processing step.
 gulp.task('critical', ['build'], function () {
 
-    // Specify final HTML. In this case we've 
-    // already built to the 'dist' location
-    var source = 'dist/index.html';
-
-    // Specify the target CSS file, used prior
-    // to inlining CSS.
-    var destCSS = 'dist/styles/main.css';
-
-    // Oust extracts your stylesheets
-    oust({ src: source }, function (hrefs){
-        // Penthouse then determines your critical
-        // path CSS
-        penthouse({
-            url : source,
-            css : 'dist/' + hrefs[0],
-            // What viewports do you care about?
-            width : 384,   // viewport width
-            height : 640   // viewport height
-        }, function(err, criticalCSS) {
-
-            // Overwrite final CSS with critical path CSS
-            fs.writeFile(destCSS, criticalCSS, function (err) {
-              if (err) return console.log(err);
-              gulp.start('inline');
-              // process.exit(0);
-            });       
-        }); 
-    });
-
-});
-
-// Inline critical path CSS
-gulp.task('inline', function () {
-    return gulp.src('dist/index.html')
-      .pipe($.inline({
+    // Generate & Inline Critical-path CSS
+    critical.generateInline({
         base: 'dist/',
-      }))
-      .pipe(gulp.dest('dist/'))
-      .pipe($.size());    
+        src: 'index.html',
+        styleTarget: 'styles/main.css',
+        htmlTarget: 'index-critical.html',
+        width: 320,
+        height: 480,
+        minify: true
+    });
 });
-
 
 // inject bower components
 gulp.task('wiredep', function () {

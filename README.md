@@ -5,6 +5,10 @@ Generate and inline critical-path CSS example using [Critical](http://github.com
 
 Live demo of [before](http://addyosmani.github.io/critical-path-css-demo/output/normal) and [after](http://addyosmani.github.io/critical-path-css-demo/output/critical) critical-path CSS generation and inlining.
 
+*PageSpeed Insights results of before and after*
+
+![](http://i.imgur.com/A838roN.gif)
+
 ### Why is critical-path CSS important?
 
 > CSS is required to construct the render tree for your pages and JavaScript will often block on CSS during initial construction of the page. You should ensure that any non-essential CSS is marked as non-critical (e.g. print and other media queries), and that the amount of critical CSS and the time to deliver it is as small as possible.

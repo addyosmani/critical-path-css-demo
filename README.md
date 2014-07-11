@@ -9,7 +9,17 @@ Live demo of [before](http://addyosmani.github.io/critical-path-css-demo/output/
 
 ![](http://i.imgur.com/A838roN.gif)
 
-### Great. So, what's your recommendation?
+*WebPageTest results*
+
+Before:
+
+![](http://i.imgur.com/21Nrffy.png)
+
+After:
+
+![](http://i.imgur.com/GtINgPj.png)
+
+### Great. So, what are your recommendations?
 
 Use [Critical](https://github.com/addyosmani/critical) for generating and inlining your critical-path CSS and [loadCSS](https://github.com/filamentgroup/loadCSS/) to
 async load in your [site-wide](https://github.com/addyosmani/critical-path-css-demo/blob/gh-pages/output/critical/index.html#L61) styles.

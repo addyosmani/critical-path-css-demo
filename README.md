@@ -20,13 +20,16 @@ npm install
 
 ## Generating and inlining critical-path CSS
 
+**Note: There are two build commands available. This allows you to compare the difference
+between the output of a normal build and the output with critical-path CSS.**
+
 The default (minify, concat) build for the project can be run with:
 
 ```
 gulp
 ```
 
-As you can see, Bootstrap's CSS is still 100KB after minification. 
+As you can see, Bootstrap's CSS is still 100KB after minification.
 
 The complete (critical-path) build can be run with:
 
@@ -34,4 +37,8 @@ The complete (critical-path) build can be run with:
 gulp critical
 ```
 
-This performs the normal build, then generates and inlines critical-path CSS for the page, taking the total size of HTML + CSS in index.html down to 7KB.
+This performs the normal build, then generates and inlines critical-path CSS for the page,
+taking the total size of HTML + CSS in index.html down to 7KB.
+
+In a production level project, you would probably want to load in the rest of your app-wide
+CSS asyncronously.

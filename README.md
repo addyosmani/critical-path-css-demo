@@ -13,9 +13,9 @@ Generate and inline critical-path CSS example using [Critical](http://github.com
 
 ## Installation
 
-```
-cd critical-path-css-demo
-npm install
+```sh
+$ cd critical-path-css-demo
+$ npm install
 ```
 
 ## Generating and inlining critical-path CSS
@@ -25,16 +25,16 @@ between the output of a normal build and the output with critical-path CSS.**
 
 The default (minify, concat) build for the project can be run with:
 
-```
-gulp
+```sh
+$ gulp
 ```
 
 As you can see, Bootstrap's CSS is still 100KB after minification.
 
 The complete (critical-path) build can be run with:
 
-```
-gulp critical
+```sh
+$ gulp critical
 ```
 
 This performs the normal build, then generates and inlines critical-path CSS for the page,

@@ -9,6 +9,11 @@ Live demo of [before](http://addyosmani.github.io/critical-path-css-demo/output/
 
 ![](http://i.imgur.com/A838roN.gif)
 
+### Great. So, what's your recommendation?
+
+Use [Critical](https://github.com/addyosmani/critical) for generating and inlining your critical-path CSS and [loadCSS](https://github.com/filamentgroup/loadCSS/) to
+async load in your [site-wide](https://github.com/addyosmani/critical-path-css-demo/blob/gh-pages/output/critical/index.html#L61) styles.
+
 ### Why is critical-path CSS important?
 
 > CSS is required to construct the render tree for your pages and JavaScript will often block on CSS during initial construction of the page. You should ensure that any non-essential CSS is marked as non-critical (e.g. print and other media queries), and that the amount of critical CSS and the time to deliver it is as small as possible.
@@ -46,5 +51,4 @@ $ gulp critical
 This performs the normal build, then generates and inlines critical-path CSS for the page,
 taking the total size of HTML + CSS in index.html down to 7KB.
 
-In a production level project, you would probably want to load in the rest of your app-wide
-CSS asyncronously.
+I then manually async load in the site-wide styles using [loadCSS](https://github.com/filamentgroup/loadCSS/).

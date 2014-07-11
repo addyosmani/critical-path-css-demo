@@ -68,3 +68,10 @@ This performs the normal build, then generates and inlines critical-path CSS for
 taking the total size of HTML + CSS in index.html down to 7KB.
 
 I then manually async load in the site-wide styles using [loadCSS](https://github.com/filamentgroup/loadCSS/).
+
+## Disclaimer
+
+Note that this sample project is just that - a sample. It does not demonstrate how well these tools and
+techniques work on a complex site nor a site making heavy use of dynamic styles. Your mileage may vary
+and I encourage testing the tools available before making a decision about whether Critical makes sense
+for you.

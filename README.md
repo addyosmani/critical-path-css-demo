@@ -7,7 +7,13 @@ Live demo of [before](http://addyosmani.github.io/critical-path-css-demo/output/
 
 *PageSpeed Insights results of before and after*
 
-![](http://i.imgur.com/A838roN.gif)
+Before:
+
+![](http://i.imgur.com/3DttMtZ.png)
+
+After:
+
+![](http://i.imgur.com/Z72MXHH.png)
 
 *WebPageTest results*
 

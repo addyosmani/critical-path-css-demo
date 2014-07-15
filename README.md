@@ -71,9 +71,7 @@ I then manually async load in the site-wide styles using [loadCSS](https://githu
 
 ## Tutorial
 
-Let's assume you have a project which already has [Gulp](http://gulpjs.com) setup. 
-
-If not, follow the next few lines to install and scaffold a project using [Yeoman](http://yeoman.io):
+Follow the next few lines to install and scaffold a project using [Yeoman](http://yeoman.io) and Gulp:
 
 ```sh
 $ mkdir myapp && cd myapp
@@ -83,7 +81,11 @@ $ yo gulp-webapp
 # Select Bootstrap and say no to Modernizr & Sass
 ```
 
-You should now have a valid set of source files, including a `Gulpfile.js`. The first thing we're going to do is install the Critical module which can generate and inline your critical-path CSS for you. We'll also be using a Rename module. These can be installed as follows:
+You should now have a valid set of source files, including a `Gulpfile.js`. 
+
+The first thing we're going to do is install the Critical module which can generate and inline your critical-path CSS for you. We'll also be using a Rename module, which we'll explain the need for shortly. 
+
+These can be installed as follows:
 
 ```sh
 $ cd myapp
@@ -98,7 +100,7 @@ var critical = require('critical');
 
 We can now use it in our build process. Let's write a new task called `critical`.
 
-Our workflow for critical-path CSS is to first run a normal `build`, which will generate the optimized CSS and resources needed for our app. We pass the `build` command as the second argument below:
+Our workflow for critical-path CSS is to first run a normal `build`, which will generate the optimized CSS (`dist/styles/main.css`) and resources needed for our app. We pass the `build` command as the second argument below:
 
 ```js
 gulp.task('critical', ['build'], function () {
@@ -106,7 +108,7 @@ gulp.task('critical', ['build'], function () {
 });
 ```
 
-Critical will overwrite your optimized CSS with critical-path CSS, so we'll want to copy the `dist` styles to a new file called `site.css` so we can load it later on. We'll do this in a separate task called `copystyles` and reference it in our task.
+Critical will overwrite your optimized CSS with critical-path CSS, so we'll want to copy the `dist` styles to a new file called `site.css` so we can load it later on. We'll do this in a separate task called `copystyles` and reference it in our task. Note that we're using the rename module below to rename our output:
 
 ```js
 gulp.task('copystyles', function () {
@@ -122,7 +124,19 @@ gulp.task('critical', ['build', 'copystyles'], function () {
 });
 ```
 
-We'll then read the app's `index.html` file and generate the critical-path (above the fold) CSS, finalling inlining it in our `index.html` file.
+Note: Before continuing, open up `app/index.html` and update the styles block in the `<head>` so that both Bootstrap and your custom styles are output to a single file:
+
+```html
+<!-- build:css styles/main.css -->
+<!-- bower:css -->
+<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+<link rel="stylesheet" href="styles/main.css">
+<!-- endbuild -->
+```
+
+This makes things more straight-forward when it comes to inlining later on.
+
+We'll then read the app's `index.html` file and generate the critical-path (above the fold) CSS, finally inlining it in our `index.html` file.
 
 ```js
 gulp.task('critical', ['build', 'copystyles'], function () {

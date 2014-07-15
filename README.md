@@ -83,7 +83,7 @@ $ yo gulp-webapp
 
 You should now have a valid set of source files, including a `Gulpfile.js`. 
 
-The first thing we're going to do is install the Critical module which can generate and inline your critical-path CSS for you. We'll also be using a Rename module, which we'll explain the need for shortly. 
+The first thing we're going to do is install the Critical module which can generate and inline your critical-path CSS for you. We'll also be using a [Rename](https://npmjs.org/package/gulp-rename/) module, which we'll explain the need for shortly. 
 
 These can be installed as follows:
 
@@ -114,7 +114,7 @@ Critical will overwrite your optimized CSS with critical-path CSS, so we'll want
 gulp.task('copystyles', function () {
     return gulp.src(['dist/styles/main.css'])
         .pipe($.rename({
-            basename: "site"
+            basename: "site" // site.css
         }))
         .pipe(gulp.dest('dist/styles'));
 });
@@ -156,7 +156,7 @@ Above I've passed in a `width` and `height` which represent the viewports I'm ta
 
 Generating and inlining above-the-fold CSS is not enough as we'll also want to load in our site-wide styles which will cover the below-the-fold CSS amongst other things.
 
-In `app/index.html` (or `dist/index.html` if you prefer), add the following script to the bottom of the file. This uses the `loadCSS` function by FilamentGroup which will asyncronously load your site styles for you:
+In `app/index.html` (or `dist/index.html` if you prefer), add the following script to the bottom of the file. This uses the [loadCSS](https://github.com/filamentgroup/loadCSS/) function by FilamentGroup which will asyncronously load your site styles for you:
 
 ```js
 function loadCSS(e,t,n){"use strict";var i=window.document.createElement("link");var o=t||window.document.getElementsByTagName("script")[0];i.rel="stylesheet";i.href=e;i.media="only x";o.parentNode.insertBefore(i,o);setTimeout(function(){i.media=n||"all"})}

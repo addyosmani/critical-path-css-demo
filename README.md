@@ -9,11 +9,11 @@ Live demo of [before](http://addyosmani.github.io/critical-path-css-demo/output/
 
 Before:
 
-![](http://i.imgur.com/3DttMtZ.png)
+![](http://i.imgur.com/3vB2xRB.png)
 
 After:
 
-![](http://i.imgur.com/Z72MXHH.png)
+![](http://i.imgur.com/Kk6kCqn.png)
 
 *WebPageTest results*
 

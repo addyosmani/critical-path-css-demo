@@ -69,13 +69,62 @@ taking the total size of HTML + CSS in index.html down to 7KB.
 
 I then manually async load in the site-wide styles using [loadCSS](https://github.com/filamentgroup/loadCSS/).
 
-## Snippet
+## Tutorial
+
+Let's assume you have a project which already has [Gulp](http://gulpjs.com) setup. 
+
+If not, follow the next few lines to install and scaffold a project using [Yeoman](http://yeoman.io):
+
+```sh
+$ mkdir myapp && cd myapp
+$ npm install -g yo generator-gulp-webapp
+$ yo gulp-webapp
+
+# Select Bootstrap and say no to Modernizr & Sass
+```
+
+You should now have a valid set of source files, including a `Gulpfile.js`. The first thing we're going to do is install the Critical module which can generate and inline your critical-path CSS for you. We'll also be using a Rename module. These can be installed as follows:
+
+```sh
+$ cd myapp
+$ npm install critical gulp-rename --save-dev
+```
+
+Great. Next, add a reference to Critical at the top of your `Gulpfile.js`:
 
 ```js
 var critical = require('critical');
-...
-...
-// Generate & Inline Critical-path CSS
+```
+
+We can now use it in our build process. Let's write a new task called `critical`.
+
+Our workflow for critical-path CSS is to first run a normal `build`, which will generate the optimized CSS and resources needed for our app. We pass the `build` command as the second argument below:
+
+```js
+gulp.task('critical', ['build'], function () {
+
+});
+```
+
+Critical will overwrite your optimized CSS with critical-path CSS, so we'll want to copy the `dist` styles to a new file called `site.css` so we can load it later on. We'll do this in a separate task called `copystyles` and reference it in our task.
+
+```js
+gulp.task('copystyles', function () {
+    return gulp.src(['dist/styles/main.css'])
+        .pipe($.rename({
+            basename: "site"
+        }))
+        .pipe(gulp.dest('dist/styles'));
+});
+
+gulp.task('critical', ['build', 'copystyles'], function () {
+
+});
+```
+
+We'll then read the app's `index.html` file and generate the critical-path (above the fold) CSS, finalling inlining it in our `index.html` file.
+
+```js
 gulp.task('critical', ['build', 'copystyles'], function () {
     critical.generateInline({
         base: 'dist/',
@@ -88,6 +137,20 @@ gulp.task('critical', ['build', 'copystyles'], function () {
     });
 });
 ```
+
+Above I've passed in a `width` and `height` which represent the viewports I'm targeting with my above-the-fold CSS. Great. So when we run `gulp critical` now we should be able to successfully generate critical-path CSS.
+
+Generating and inlining above-the-fold CSS is not enough as we'll also want to load in our site-wide styles which will cover the below-the-fold CSS amongst other things.
+
+In `app/index.html` (or `dist/index.html` if you prefer), add the following script to the bottom of the file. This uses the `loadCSS` function by FilamentGroup which will asyncronously load your site styles for you:
+
+```js
+function loadCSS(e,t,n){"use strict";var i=window.document.createElement("link");var o=t||window.document.getElementsByTagName("script")[0];i.rel="stylesheet";i.href=e;i.media="only x";o.parentNode.insertBefore(i,o);setTimeout(function(){i.media=n||"all"})}
+
+loadCSS('styles/site.css');
+```
+
+If you updated `app`, run `gulp critical` just one more time to make sure the snippet is included in your final output and you're done!
 
 ## Disclaimer
 

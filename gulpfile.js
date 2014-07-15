@@ -1,8 +1,8 @@
 'use strict';
+// generated on 2014-07-15 using generator-gulp-webapp 0.1.0
 
 var gulp = require('gulp');
 var critical = require('critical');
-var path = require('path');
 
 // load plugins
 var $ = require('gulp-load-plugins')();
@@ -63,6 +63,8 @@ gulp.task('extras', function () {
         .pipe(gulp.dest('dist'));
 });
 
+
+
 gulp.task('clean', function () {
     return gulp.src(['.tmp', 'dist'], { read: false }).pipe($.clean());
 });
@@ -92,9 +94,29 @@ gulp.task('serve', ['connect'], function () {
     require('opn')('http://localhost:9000');
 });
 
-gulp.task('critical', ['build'], function () {
+// Copy our site styles to a site.css file
+// for async loading later
+gulp.task('copystyles', function () {
+    return gulp.src(['dist/styles/main.css'])
+        .pipe($.rename({
+            basename: "site"
+        }))
+        .pipe(gulp.dest('dist/styles'));
+});
 
-    // Generate & Inline Critical-path CSS
+
+// Generate & Inline Critical-path CSS
+gulp.task('critical', ['build', 'copystyles'], function () {
+
+    // At this point, we have our
+    // production styles in main/styles.css
+
+    // As we're going to overwrite this with
+    // our critical-path CSS let's create a copy
+    // of our site-wide styles so we can async
+    // load them in later. We do this with 
+    // 'copystyles' above
+
     critical.generateInline({
         base: 'dist/',
         src: 'index.html',
@@ -105,6 +127,7 @@ gulp.task('critical', ['build'], function () {
         minify: true
     });
 });
+
 
 // inject bower components
 gulp.task('wiredep', function () {

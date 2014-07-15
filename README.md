@@ -69,6 +69,26 @@ taking the total size of HTML + CSS in index.html down to 7KB.
 
 I then manually async load in the site-wide styles using [loadCSS](https://github.com/filamentgroup/loadCSS/).
 
+## Snippet
+
+```js
+var critical = require('critical');
+...
+...
+// Generate & Inline Critical-path CSS
+gulp.task('critical', ['build', 'copystyles'], function () {
+    critical.generateInline({
+        base: 'dist/',
+        src: 'index.html',
+        styleTarget: 'styles/main.css',
+        htmlTarget: 'index.html',
+        width: 320,
+        height: 480,
+        minify: true
+    });
+});
+```
+
 ## Disclaimer
 
 Note that this sample project is just that - a sample. It does not demonstrate how well these tools and

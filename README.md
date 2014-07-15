@@ -56,18 +56,15 @@ The default (minify, concat) build for the project can be run with:
 $ gulp
 ```
 
-As you can see, Bootstrap's CSS is still 100KB after minification.
-
 The complete (critical-path) build can be run with:
 
 ```sh
 $ gulp critical
 ```
 
-This performs the normal build, then generates and inlines critical-path CSS for the page,
-taking the total size of HTML + CSS in index.html down to 7KB.
+This performs the normal build, then generates and inlines critical-path CSS for the page.
 
-I then manually async load in the site-wide styles using [loadCSS](https://github.com/filamentgroup/loadCSS/).
+We then manually async load in the site-wide styles using [loadCSS](https://github.com/filamentgroup/loadCSS/).
 
 ## Tutorial
 

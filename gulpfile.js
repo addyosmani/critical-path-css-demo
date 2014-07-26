@@ -77,13 +77,13 @@ gulp.task('default', ['clean'], function () {
 
 gulp.task('connect', function () {
     var connect = require('connect'),
-        serverStatic = require('serve-static'),
-        serverIndex = require('serve-index');
+        serveStatic = require('serve-static'),
+        serveIndex = require('serve-index');
     var app = connect()
         .use(require('connect-livereload')({ port: 35729 }))
-        .use(serverStatic('app'))
-        .use(serverStatic('.tmp'))
-        .use(serverIndex('app'));
+        .use(serveStatic('app'))
+        .use(serveStatic('.tmp'))
+        .use(serveIndex('app'));
 
     require('http').createServer(app)
         .listen(9000)

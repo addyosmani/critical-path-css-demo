@@ -76,12 +76,14 @@ gulp.task('default', ['clean'], function () {
 });
 
 gulp.task('connect', function () {
-    var connect = require('connect');
+    var connect = require('connect'),
+        serveStatic = require('serve-static'),
+        serveIndex = require('serve-index');
     var app = connect()
         .use(require('connect-livereload')({ port: 35729 }))
-        .use(connect.static('app'))
-        .use(connect.static('.tmp'))
-        .use(connect.directory('app'));
+        .use(serveStatic('app'))
+        .use(serveStatic('.tmp'))
+        .use(serveIndex('app'));
 
     require('http').createServer(app)
         .listen(9000)
@@ -114,7 +116,7 @@ gulp.task('critical', ['build', 'copystyles'], function () {
     // As we're going to overwrite this with
     // our critical-path CSS let's create a copy
     // of our site-wide styles so we can async
-    // load them in later. We do this with 
+    // load them in later. We do this with
     // 'copystyles' above
 
     critical.generateInline({

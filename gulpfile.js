@@ -109,7 +109,7 @@ gulp.task('copystyles', function () {
 
 
 // Generate & Inline Critical-path CSS
-gulp.task('critical', ['build', 'copystyles'], function () {
+gulp.task('critical', ['build', 'copystyles'], function (cb) {
 
     // At this point, we have our
     // production styles in main/styles.css
@@ -128,7 +128,7 @@ gulp.task('critical', ['build', 'copystyles'], function () {
         width: 320,
         height: 480,
         minify: true
-    });
+    },cb);
 });
 
 

@@ -28,7 +28,7 @@ After:
 ### Great. So, what are your recommendations?
 
 Use [Critical](https://github.com/addyosmani/critical) for generating and inlining your critical-path CSS and [loadCSS](https://github.com/filamentgroup/loadCSS/) to
-async load in your [site-wide](https://github.com/addyosmani/critical-path-css-demo/blob/gh-pages/output/critical/index.html#L61) styles.
+async load in your [site-wide](https://github.com/addyosmani/critical-path-css-demo/blob/gh-pages/output/critical/index.html#L71) styles.
 
 ### Why is critical-path CSS important?
 

@@ -42,7 +42,7 @@ async load in your [site-wide](https://github.com/addyosmani/critical-path-css-d
 
 ```sh
 $ cd critical-path-css-demo
-$ npm install
+$ npm install && bower install
 ```
 
 ## Generating and inlining critical-path CSS

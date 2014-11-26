@@ -120,15 +120,22 @@ gulp.task('critical', ['build', 'copystyles'], function () {
     // load them in later. We do this with
     // 'copystyles' above
 
-    critical.generateInline({
+    critical.generate({
         base: 'dist/',
         src: 'index.html',
-        styleTarget: 'styles/main.css',
-        htmlTarget: 'index.html',
+        dest: 'styles/site.css',
         width: 320,
         height: 480,
         minify: true
+    }, function(err, output){
+        critical.inline({
+            base: 'dist/',
+            src: 'index.html',
+            dest: 'index-critical.html',
+            minify: true
+        });        
     });
+
 });
 
 

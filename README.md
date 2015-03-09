@@ -151,17 +151,7 @@ gulp.task('critical', ['build', 'copystyles'], function () {
 
 Above I've passed in a `width` and `height` which represent the viewports I'm targeting with my above-the-fold CSS. Great. So when we run `gulp critical` now we should be able to successfully generate critical-path CSS.
 
-Generating and inlining above-the-fold CSS is not enough as we'll also want to load in our site-wide styles which will cover the below-the-fold CSS amongst other things.
-
-In `app/index.html` (or `dist/index.html` if you prefer), add the following script to the bottom of the file. This uses the [loadCSS](https://github.com/filamentgroup/loadCSS/) function by FilamentGroup which will asyncronously load your site styles for you:
-
-```js
-function loadCSS(e,t,n){"use strict";var i=window.document.createElement("link");var o=t||window.document.getElementsByTagName("script")[0];i.rel="stylesheet";i.href=e;i.media="only x";o.parentNode.insertBefore(i,o);setTimeout(function(){i.media=n||"all"})}
-
-loadCSS('styles/site.css');
-```
-
-If you updated `app`, run `gulp critical` just one more time to make sure the snippet is included in your final output and you're done!
+Generating and inlining above-the-fold CSS is not enough as we'll also want to load in our site-wide styles which will cover the below-the-fold CSS amongst other things. Critical takes care of this, too. A small script which uses the [loadCSS](https://github.com/filamentgroup/loadCSS/) function by FilamentGroup will asyncronously load your site styles for you.
 
 ## Disclaimer
 

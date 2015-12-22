@@ -62,9 +62,7 @@ The complete (critical-path) build can be run with:
 $ gulp critical
 ```
 
-This performs the normal build, then generates and inlines critical-path CSS for the page.
-
-We then manually async load in the site-wide styles using [loadCSS](https://github.com/filamentgroup/loadCSS/).
+This performs the normal build, then generates and inlines critical-path CSS for the page. It automatically async loads in the site-wide styles using [loadCSS](https://github.com/filamentgroup/loadCSS/) as part of the workflow offered by the module.
 
 ## Tutorial
 
@@ -80,13 +78,13 @@ $ yo gulp-webapp
 
 You should now have a valid set of source files, including a `Gulpfile.js`. 
 
-The first thing we're going to do is install the Critical module which can generate and inline your critical-path CSS for you. We'll also be using a [Rename](https://npmjs.org/package/gulp-rename/) module, which we'll explain the need for shortly. 
+The first thing we're going to do is install the Critical module which can generate and inline your critical-path CSS for you. 
 
-These can be installed as follows:
+This can be installed as follows:
 
 ```sh
 $ cd myapp
-$ npm install critical gulp-rename --save-dev
+$ npm install critical --save-dev
 ```
 
 Great. Next, add a reference to Critical at the top of your `Gulpfile.js`:
@@ -105,53 +103,23 @@ gulp.task('critical', ['build'], function () {
 });
 ```
 
-Critical will overwrite your optimized CSS with critical-path CSS, so we'll want to copy the `dist` styles to a new file called `site.css` so we can load it later on. We'll do this in a separate task called `copystyles` and reference it in our task. Note that we're using the rename module below to rename our output:
+Next, we'll add in our configuration for the `critical` module:
 
 ```js
-gulp.task('copystyles', function () {
-    return gulp.src(['dist/styles/main.css'])
-        .pipe($.rename({
-            basename: "site" // site.css
-        }))
-        .pipe(gulp.dest('dist/styles'));
-});
-
-gulp.task('critical', ['build', 'copystyles'], function () {
-
-});
-```
-
-Note: Before continuing, open up `app/index.html` and update the styles block in the `<head>` so that both Bootstrap and your custom styles are output to a single file:
-
-```html
-<!-- build:css styles/main.css -->
-<!-- bower:css -->
-<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
-<link rel="stylesheet" href="styles/main.css">
-<!-- endbuild -->
-```
-
-This makes things more straight-forward when it comes to inlining later on.
-
-We'll then read the app's `index.html` file and generate the critical-path (above the fold) CSS, finally inlining it in our `index.html` file.
-
-```js
-gulp.task('critical', ['build', 'copystyles'], function () {
-    critical.generateInline({
+gulp.task('critical', ['build'], function (cb) {
+    critical.generate({
+        inline: true,
         base: 'dist/',
         src: 'index.html',
-        styleTarget: 'styles/main.css',
-        htmlTarget: 'index.html',
+        dest: 'dist/index-critical.html',
+        minify: true,
         width: 320,
-        height: 480,
-        minify: true
+        height: 480
     });
 });
 ```
 
-Above I've passed in a `width` and `height` which represent the viewports I'm targeting with my above-the-fold CSS. Great. So when we run `gulp critical` now we should be able to successfully generate critical-path CSS.
-
-Generating and inlining above-the-fold CSS is not enough as we'll also want to load in our site-wide styles which will cover the below-the-fold CSS amongst other things. Critical takes care of this, too. A small script which uses the [loadCSS](https://github.com/filamentgroup/loadCSS/) function by FilamentGroup will asyncronously load your site styles for you.
+That's it. You can now run `gulp critical` to generate a complete build where `dist/index-critical.html` will contain your final output files. Above I've passed in a `width` and `height` which represent the viewports I'm targeting with my above-the-fold CSS. `minify` ensures that the inlined CSS gets minified.
 
 ## Disclaimer
 

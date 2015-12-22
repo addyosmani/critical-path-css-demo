@@ -22,19 +22,18 @@ gulp.task('scripts', function () {
 });
 
 gulp.task('html', ['styles', 'scripts'], function () {
-    var jsFilter = $.filter('**/*.js');
-    var cssFilter = $.filter('**/*.css');
-    var assets = $.useref.assets({searchPath: '{.tmp,app}'});
+    var jsFilter = $.filter('**/*.js', {restore: true});
+    var cssFilter = $.filter('**/*.css' , {restore: true});
+    var assets = $.useref({searchPath: ['.tmp','app']});
 
     return gulp.src('app/*.html')
         .pipe(assets)
         .pipe(jsFilter)
         .pipe($.uglify())
-        .pipe(jsFilter.restore())
+        .pipe(jsFilter.restore)
         .pipe(cssFilter)
         .pipe($.csso())
-        .pipe(cssFilter.restore())
-        .pipe(assets.restore())
+        .pipe(cssFilter.restore)
         .pipe($.useref())
         .pipe(gulp.dest('dist'))
         .pipe($.size());
@@ -97,46 +96,19 @@ gulp.task('serve', ['connect'], function () {
     require('opn')('http://localhost:9000');
 });
 
-// Copy our site styles to a site.css file
-// for async loading later
-gulp.task('copystyles', function () {
-    return gulp.src(['dist/styles/main.css'])
-        .pipe($.rename({
-            basename: "site"
-        }))
-        .pipe(gulp.dest('dist/styles'));
-});
-
 
 // Generate & Inline Critical-path CSS
-gulp.task('critical', ['build', 'copystyles'], function (cb) {
-
-    // At this point, we have our
-    // production styles in main/styles.css
-
-    // As we're going to overwrite this with
-    // our critical-path CSS let's create a copy
-    // of our site-wide styles so we can async
-    // load them in later. We do this with
-    // 'copystyles' above
-
+gulp.task('critical', ['build'], function (cb) {
     critical.generate({
+        inline: true,
         base: 'dist/',
         src: 'index.html',
-        dest: 'styles/site.css',
+        dest: 'dist/index-critical.html',
         width: 320,
         height: 480,
         minify: true
-    }, function(err, output){
-        critical.inline({
-            base: 'dist/',
-            src: 'index.html',
-            dest: 'index-critical.html',
-            minify: true
-        });        
     });
 });
-
 
 // inject bower components
 gulp.task('wiredep', function () {

@@ -2,27 +2,9 @@
 
 Generate and inline critical-path CSS example using [Critical](http://github.com/addyosmani/critical).
 
-Live demo of [before](http://addyosmani.github.io/critical-path-css-demo/output/normal) and [after](http://addyosmani.github.io/critical-path-css-demo/output/critical) critical-path CSS generation and inlining.
+Live demo of [before](https://mor10.github.io/critical-path-css-demo/output/normal/index.html) and [after](https://mor10.github.io/critical-path-css-demo/output/critical/index.html) critical-path CSS generation and inlining.
 
-_PageSpeed Insights results of before and after_
-
-Before:
-
-![](http://i.imgur.com/3vB2xRB.png)
-
-After:
-
-![](http://i.imgur.com/Kk6kCqn.png)
-
-_WebPageTest results_
-
-Before:
-
-![](http://i.imgur.com/21Nrffy.png)
-
-After:
-
-![](http://i.imgur.com/GtINgPj.png)
+Example based on stripped-down version of Bootstrap Starter.
 
 ### Great. So, what are your recommendations?
 
@@ -121,3 +103,8 @@ Note that this sample project is just that - a sample. It does not demonstrate h
 techniques work on a complex site nor a site making heavy use of dynamic styles. Your mileage may vary
 and I encourage testing the tools available before making a decision about whether Critical makes sense
 for you.
+
+# Credits
+
+- Original example by @addyosmani (2014 - 2017)
+- Updated example by @mor10 (2021)

@@ -1,11 +1,10 @@
-critical-path-css-demo
-======================
+# critical-path-css-demo
 
 Generate and inline critical-path CSS example using [Critical](http://github.com/addyosmani/critical).
 
 Live demo of [before](http://addyosmani.github.io/critical-path-css-demo/output/normal) and [after](http://addyosmani.github.io/critical-path-css-demo/output/critical) critical-path CSS generation and inlining.
 
-*PageSpeed Insights results of before and after*
+_PageSpeed Insights results of before and after_
 
 Before:
 
@@ -15,7 +14,7 @@ After:
 
 ![](http://i.imgur.com/Kk6kCqn.png)
 
-*WebPageTest results*
+_WebPageTest results_
 
 Before:
 
@@ -42,7 +41,7 @@ async load in your [site-wide](https://github.com/addyosmani/critical-path-css-d
 
 ```sh
 $ cd critical-path-css-demo
-$ npm install && bower install
+$ npm install
 ```
 
 ## Generating and inlining critical-path CSS
@@ -76,9 +75,9 @@ $ yo gulp-webapp
 # Select Bootstrap and say no to Modernizr & Sass
 ```
 
-You should now have a valid set of source files, including a `Gulpfile.js`. 
+You should now have a valid set of source files, including a `Gulpfile.js`.
 
-The first thing we're going to do is install the Critical module which can generate and inline your critical-path CSS for you. 
+The first thing we're going to do is install the Critical module which can generate and inline your critical-path CSS for you.
 
 This can be installed as follows:
 
@@ -90,7 +89,7 @@ $ npm install critical --save-dev
 Great. Next, add a reference to Critical at the top of your `Gulpfile.js`:
 
 ```js
-var critical = require('critical');
+var critical = require("critical");
 ```
 
 We can now use it in our build process. Let's write a new task called `critical`.
@@ -98,24 +97,22 @@ We can now use it in our build process. Let's write a new task called `critical`
 Our workflow for critical-path CSS is to first run a normal `build`, which will generate the optimized CSS (`dist/styles/main.css`) and resources needed for our app. We pass the `build` command as the second argument below:
 
 ```js
-gulp.task('critical', ['build'], function () {
-
-});
+gulp.task("critical", ["build"], function () {});
 ```
 
 Next, we'll add in our configuration for the `critical` module:
 
 ```js
-gulp.task('critical', ['build'], function (cb) {
-    critical.generate({
-        inline: true,
-        base: 'dist/',
-        src: 'index.html',
-        dest: 'dist/index-critical.html',
-        minify: true,
-        width: 320,
-        height: 480
-    });
+gulp.task("critical", ["build"], function (cb) {
+  critical.generate({
+    inline: true,
+    base: "dist/",
+    src: "index.html",
+    dest: "dist/index-critical.html",
+    minify: true,
+    width: 320,
+    height: 480,
+  });
 });
 ```
 

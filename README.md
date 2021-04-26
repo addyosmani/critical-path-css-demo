@@ -65,58 +65,55 @@ This performs the normal build, then generates and inlines critical-path CSS for
 
 ## Tutorial
 
-Follow the next few lines to install and scaffold a project using [Yeoman](http://yeoman.io) and Gulp:
+Follw these instructions to incorporate Critical in your Gulp build process:
+
+Install the Critical module which can generate and inline your critical-path CSS for you. From your project folder containing `Gulpfile.js`:
 
 ```sh
-$ mkdir myapp && cd myapp
-$ npm install -g yo generator-gulp-webapp
-$ yo gulp-webapp
-
-# Select Bootstrap and say no to Modernizr & Sass
-```
-
-You should now have a valid set of source files, including a `Gulpfile.js`.
-
-The first thing we're going to do is install the Critical module which can generate and inline your critical-path CSS for you.
-
-This can be installed as follows:
-
-```sh
-$ cd myapp
 $ npm install critical --save-dev
 ```
 
-Great. Next, add a reference to Critical at the top of your `Gulpfile.js`:
+Next, add a reference to Critical at the top of your `Gulpfile.js`:
 
 ```js
-var critical = require("critical");
+const critical = require("critical");
 ```
 
-We can now use it in our build process. Let's write a new task called `critical`.
-
-Our workflow for critical-path CSS is to first run a normal `build`, which will generate the optimized CSS (`dist/styles/main.css`) and resources needed for our app. We pass the `build` command as the second argument below:
+Our workflow for critical-path CSS is to first run all other build processes to generate the optimized CSS and resources needed for our app. In this example, the js, images, styles, and html processes are run in parallel:
 
 ```js
-gulp.task("critical", ["build"], function () {});
+exports.default = parallel(js, images, styles, html);
 ```
 
-Next, we'll add in our configuration for the `critical` module:
+Next, write a new function called `criticalCSS`:
 
 ```js
-gulp.task("critical", ["build"], function (cb) {
+function criticalCSS(cb) {
   critical.generate({
     inline: true,
-    base: "dist/",
-    src: "index.html",
-    dest: "dist/index-critical.html",
+    base: "./dist/",
+    src: "../src/index.html",
+    // Output results to file
+    target: {
+      css: "critical.css",
+      html: "index.html",
+      uncritical: "uncritical.css",
+    },
     minify: true,
     width: 320,
     height: 480,
   });
-});
+  cb();
+}
 ```
 
-That's it. You can now run `gulp critical` to generate a complete build where `dist/index-critical.html` will contain your final output files. Above I've passed in a `width` and `height` which represent the viewports I'm targeting with my above-the-fold CSS. `minify` ensures that the inlined CSS gets minified.
+Finally, run the `criticalCSS` function after the other processes are complete. In this example we use the `series` to control the execution order:
+
+```js
+exports.critical = series(parallel(js, images, styles, html), criticalCSS);
+```
+
+That's it. You can now run `gulp` to generate a standard build, and `gulp critical` to generate a complete build using Critical.
 
 ## Disclaimer
 

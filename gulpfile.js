@@ -2,7 +2,7 @@ const gulp = require("gulp");
 const { series, parallel } = require("gulp");
 const terser = require("gulp-terser");
 const imagemin = require("gulp-imagemin");
-var critical = require("critical");
+const critical = require("critical");
 
 function js() {
   return gulp.src("./src/**/*.js").pipe(terser()).pipe(gulp.dest("./dist/"));

@@ -1,81 +1,173 @@
-<!doctype html>
-<html class="no-js">
-    <head>
-        <meta charset="utf-8">
-        <title>development</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>:root{--blue:#007bff;--indigo:#6610f2;--purple:#6f42c1;--pink:#e83e8c;--red:#dc3545;--orange:#fd7e14;--yellow:#ffc107;--green:#28a745;--teal:#20c997;--cyan:#17a2b8;--white:#fff;--gray:#6c757d;--gray-dark:#343a40;--primary:#007bff;--secondary:#6c757d;--success:#7952b3;--info:#17a2b8;--warning:#ffc107;--danger:#dc3545;--light:#f8f9fa;--dark:#343a40;--breakpoint-xs:0;--breakpoint-sm:576px;--breakpoint-md:768px;--breakpoint-lg:992px;--breakpoint-xl:1200px;--font-family-sans-serif:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";--font-family-monospace:SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}*,::after,::before{box-sizing:border-box}html{font-family:sans-serif;line-height:1.15;-webkit-text-size-adjust:100%}header{display:block}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:1rem;font-weight:400;line-height:1.5;color:#333;text-align:left;background-color:#fff}h1,h5{margin-top:0;margin-bottom:.5rem}p{margin-top:0;margin-bottom:1rem}a{color:#007bff;text-decoration:none;background-color:transparent}svg{overflow:hidden;vertical-align:middle}button{border-radius:0}button{margin:0;font-family:inherit;font-size:inherit;line-height:inherit}button{overflow:visible}button{text-transform:none}[type=button],button{-webkit-appearance:button}[type=button]::-moz-focus-inner,button::-moz-focus-inner{padding:0;border-style:none}::-webkit-file-upload-button{font:inherit;-webkit-appearance:button}.h4,h1,h5{margin-bottom:.5rem;font-weight:500;line-height:1.2}h1{font-size:2.5rem}.h4{font-size:1.5rem}h5{font-size:1.25rem}.lead{font-size:1.25rem;font-weight:300}.col-lg-8,.col-md-8{position:relative;width:100%;padding-right:15px;padding-left:15px}.btn{display:inline-block;font-weight:400;color:#333;text-align:center;vertical-align:middle;background-color:transparent;border:1px solid transparent;padding:.375rem .75rem;font-size:1rem;line-height:1.5;border-radius:.4rem}.btn-primary{color:#fff;background:#007bff linear-gradient(180deg,#268fff,#007bff) repeat-x;border-color:#007bff;box-shadow:inset 0 1px 0 rgba(255,255,255,.15),0 1px 1px rgba(0,0,0,.075)}.btn-secondary{color:#fff;background:#6c757d linear-gradient(180deg,#828a91,#6c757d) repeat-x;border-color:#6c757d;box-shadow:inset 0 1px 0 rgba(255,255,255,.15),0 1px 1px rgba(0,0,0,.075)}.fade:not(.show){opacity:0}.close{float:right;font-size:1.5rem;font-weight:700;line-height:1;color:#000;text-shadow:0 1px 0 #fff;opacity:.5}button.close{padding:0;background-color:transparent;border:0}.modal{position:fixed;top:0;left:0;z-index:1050;display:none;width:100%;height:100%;overflow:hidden;outline:0}.modal-dialog{position:relative;width:auto;margin:.5rem}.modal.fade .modal-dialog{transform:translate(0,-50px)}.modal-dialog-centered{display:flex;align-items:center;min-height:calc(100% - 1rem)}.modal-dialog-centered::before{display:block;height:calc(100vh - 1rem);height:min-content;content:""}.modal-content{position:relative;display:flex;flex-direction:column;width:100%;background-color:#fff;background-clip:padding-box;border:1px solid rgba(0,0,0,.2);border-radius:.3rem;box-shadow:0 .25rem .5rem rgba(0,0,0,.5);outline:0}.modal-header{display:flex;align-items:flex-start;justify-content:space-between;padding:1rem 1rem;border-bottom:1px solid #dee2e6;border-top-left-radius:calc(.3rem - 1px);border-top-right-radius:calc(.3rem - 1px)}.modal-header .close{padding:1rem 1rem;margin:-1rem -1rem -1rem auto}.modal-title{margin-bottom:0;line-height:1.5}.modal-body{position:relative;flex:1 1 auto;padding:1rem}.modal-footer{display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;padding:.75rem;border-top:1px solid #dee2e6;border-bottom-right-radius:calc(.3rem - 1px);border-bottom-left-radius:calc(.3rem - 1px)}.modal-footer>*{margin:.25rem}.border-bottom{border-bottom:1px solid #dee2e6!important}.d-inline-block{display:inline-block!important}.d-flex{display:flex!important}.align-items-center{align-items:center!important}.mr-2{margin-right:.5rem!important}.mb-5{margin-bottom:3rem!important}.px-0{padding-right:0!important}.px-0{padding-left:0!important}.px-3{padding-right:1rem!important}.pb-3{padding-bottom:1rem!important}.px-3{padding-left:1rem!important}.py-5{padding-top:3rem!important}.py-5{padding-bottom:3rem!important}.mx-auto{margin-right:auto!important}.mx-auto{margin-left:auto!important}.text-dark{color:#343a40!important}.text-decoration-none{text-decoration:none!important}body{padding:3rem 1.5rem}</style>
+    <link rel="stylesheet" href="/uncritical.css" media="print" onload="this.media='all'">
+    <title>Bootstrap npm starter</title>
+  </head>
+  <body>
+    <div class="col-md-8 py-5 px-3 mx-auto">
+      <header class="pb-3 mb-5 border-bottom">
+        <h1 class="h4">
+          <a
+            href="/"
+            class="d-flex align-items-center text-dark text-decoration-none"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="40"
+              height="32"
+              class="d-inline-block mr-2"
+              viewBox="0 0 118 94"
+              role="img"
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M24.509 0c-6.733 0-11.715 5.893-11.492 12.284.214 6.14-.064 14.092-2.066 20.577C8.943 39.365 5.547 43.485 0 44.014v5.972c5.547.529 8.943 4.649 10.951 11.153 2.002 6.485 2.28 14.437 2.066 20.577C12.794 88.106 17.776 94 24.51 94H93.5c6.733 0 11.714-5.893 11.491-12.284-.214-6.14.064-14.092 2.066-20.577 2.009-6.504 5.396-10.624 10.943-11.153v-5.972c-5.547-.529-8.934-4.649-10.943-11.153-2.002-6.484-2.28-14.437-2.066-20.577C105.214 5.894 100.233 0 93.5 0H24.508zM80 57.863C80 66.663 73.436 72 62.543 72H44a2 2 0 01-2-2V24a2 2 0 012-2h18.437c9.083 0 15.044 4.92 15.044 12.474 0 5.302-4.01 10.049-9.119 10.88v.277C75.317 46.394 80 51.21 80 57.863zM60.521 28.34H49.948v14.934h8.905c6.884 0 10.68-2.772 10.68-7.727 0-4.643-3.264-7.207-9.012-7.207zM49.948 49.2v16.458H60.91c7.167 0 10.964-2.876 10.964-8.281 0-5.406-3.903-8.178-11.425-8.178H49.948z"
+                fill="currentColor"
+              ></path>
+            </svg>
+            <span>npm starter</span>
+          </a>
+        </h1>
+      </header>
 
-        <!-- styles/main.css is where we initially write all your CSS and then overwrite it with your critical path CSS. Your site-wide styles are in styles/site.css, which we async load in via JavaScript lower down in the page  -->
-        <style type="text/css">
-html{font-family:sans-serif;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%}body{margin:0}a{background:0 0}h1{margin:.67em 0}@media print{*{color:#000!important;text-shadow:none!important;background:0 0!important;box-shadow:none!important}a{text-decoration:underline}a[href]:after{content:" (" attr(href)")"}a[href^="#"]:after{content:""}h3,p{orphans:3;widows:3}h3{page-break-after:avoid}}*,:after,:before{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}html{font-size:62.5%;-webkit-tap-highlight-color:transparent}body{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:14px;line-height:1.42857143;color:#333;background-color:#fff}a{color:#428bca;text-decoration:none}h1,h3,h4{font-family:inherit;font-weight:500;line-height:1.1;color:inherit}h1,h3{margin-top:20px;margin-bottom:10px}h4{margin-top:10px;margin-bottom:10px}h1{font-size:36px}h3{font-size:24px}h4{font-size:18px}p{margin:0 0 10px}.lead{margin-bottom:20px;font-size:16px;font-weight:200;line-height:1.4}@media (min-width:768px){.lead{font-size:21px}}.text-muted{color:#999}ul{margin-top:0;margin-bottom:10px}.container{padding-right:15px;padding-left:15px;margin-right:auto;margin-left:auto}@media (min-width:768px){.container{width:750px}}@media (min-width:992px){.container{width:970px}}@media (min-width:1200px){.container{width:1170px}}.row{margin-right:-15px;margin-left:-15px}.col-lg-6{position:relative;min-height:1px;padding-right:15px;padding-left:15px}@media (min-width:1200px){.col-lg-6{float:left;width:50%}}.btn{display:inline-block;padding:6px 12px;margin-bottom:0;font-size:14px;font-weight:400;line-height:1.42857143;text-align:center;white-space:nowrap;vertical-align:middle;cursor:pointer;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;background-image:none;border:1px solid transparent;border-radius:4px}.btn-success{color:#fff;background-color:#5cb85c;border-color:#4cae4c}.btn-lg{padding:10px 16px;font-size:18px;line-height:1.33;border-radius:6px}.nav{padding-left:0;margin-bottom:0;list-style:none}.nav>li,.nav>li>a{position:relative;display:block}.nav>li>a{padding:10px 15px}.nav-pills>li{float:left}.nav-pills>li>a{border-radius:4px}.nav-pills>li+li{margin-left:2px}.nav-pills>li.active>a{color:#fff;background-color:#428bca}.jumbotron{padding:30px;margin-bottom:30px;background-color:#eee}.jumbotron,.jumbotron h1{color:inherit}.jumbotron p{margin-bottom:15px;font-size:21px;font-weight:200}.container .jumbotron{border-radius:6px}@media screen and (min-width:768px){.jumbotron{padding-top:48px;padding-bottom:48px}.container .jumbotron{padding-right:60px;padding-left:60px}.jumbotron h1{font-size:63px}}.container:after,.container:before,.nav:after,.nav:before,.row:after,.row:before{display:table;content:" "}.container:after,.nav:after,.row:after{clear:both}.pull-right{float:right!important}body{padding-top:20px;padding-bottom:20px}.header,.marketing{padding-left:15px;padding-right:15px}.header{border-bottom:1px solid #e5e5e5}.header h3{margin-top:0;margin-bottom:0;line-height:40px;padding-bottom:19px}.jumbotron{text-align:center;border-bottom:1px solid #e5e5e5}.jumbotron .btn{font-size:21px;padding:14px 24px}.marketing{margin:40px 0}@media screen and (min-width:768px){.container{max-width:730px}.header,.marketing{padding-left:0;padding-right:0}.header{margin-bottom:30px}.jumbotron{border-bottom:0}}
-</style>
-<noscript>
-<link rel="stylesheet" href="styles/main.css">
-</noscript>
+      <h1>Get started with Bootstrap</h1>
+      <div class="col-lg-8 px-0">
+        <p class="lead">
+          You've successfully loaded up the Bootstrap npm starter project! It's
+          loaded up with
+          <a
+            href="https://getbootstrap.com/docs/4.6/getting-started/introduction/"
+            >Bootstrap 4</a
+          >, <a href="https://icons.getbootstrap.com">Bootstrap Icons</a>, and
+          tooling for compiling our Sass and JavaScript to your needs.
+        </p>
+        <p>
+          If this button appears blue and the link appears purple, you've done
+          it!
+        </p>
+      </div>
 
-    </head>
-    <body>
-        <!--[if lt IE 10]>
-            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
+      <button
+        type="button"
+        class="btn btn-primary mr-3"
+        data-toggle="modal"
+        data-target="#exampleModal"
+      >
+        Toggle example modal
+      </button>
+      <a href="#" class="text-success">Example link</a>
 
-        <div class="container">
-            <div class="header">
-                <ul class="nav nav-pills pull-right">
-                    <li class="active"><a href="#">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Contact</a></li>
-                </ul>
-                <h3 class="text-muted">development</h3>
+      <div
+        class="modal fade"
+        id="exampleModal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Success!</h5>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
             </div>
-
-            <div class="jumbotron">
-                <h1>&apos;Allo, &apos;Allo!</h1>
-                <p class="lead">Always a pleasure scaffolding your apps.</p>
-                <p><a class="btn btn-lg btn-success" href="#">Splendid!</a></p>
+            <div class="modal-body">
+              If you're seeing this modal after clicking the button on the page,
+              Bootstrap's CSS and JS are both working properly.
             </div>
-
-            <div class="row marketing">
-                <div class="col-lg-6">
-                    <h4>HTML5 Boilerplate</h4>
-                    <p>HTML5 Boilerplate is a professional front-end template for building fast, robust, and adaptable web apps or sites.</p>
-
-                    <h4>Bootstrap</h4>
-                    <p>Sleek, intuitive, and powerful mobile first front-end framework for faster and easier web development.</p>
-                </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-dismiss="modal"
+              >
+                Close
+              </button>
+              <button type="button" class="btn btn-primary">
+                Save changes
+              </button>
             </div>
+          </div>
+        </div>
+      </div>
 
-            <div class="footer">
-                <p>&#x2665; from the Yeoman team</p>
-            </div>
+      <hr class="my-5 w-25 mx-0" />
+
+      <div class="row">
+        <div class="col-md-6">
+          <h2>Adding Bootstrap Icons</h2>
+          <p>
+            <a href="https://icons.getbootstrap.com">Bootstrap Icons</a> are
+            included with the SVG sprite here, but there are other
+            <a href="https://icons.getbootstrap.com/#usage">usage options</a>,
+            too. They're styleable with text utilities and more.
+          </p>
+
+          <svg class="bi text-danger" width="32" height="32">
+            <use xlink:href="assets/icons/bootstrap-icons.svg#heart-fill" />
+          </svg>
+          <svg class="bi text-dark" width="32" height="32">
+            <use xlink:href="assets/icons/bootstrap-icons.svg#toggles" />
+          </svg>
+          <svg class="bi text-primary" width="32" height="32">
+            <use xlink:href="assets/icons/bootstrap-icons.svg#shop" />
+          </svg>
         </div>
 
-        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
-        <script>
-            (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
-            function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
-            e=o.createElement(i);r=o.getElementsByTagName(i)[0];
-            e.src='//www.google-analytics.com/analytics.js';
-            r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
-            ga('create','UA-XXXXX-X');ga('send','pageview');
-        </script>
+        <div class="col-md-6">
+          <h2>Guides</h2>
+          <p>
+            Read more detailed instructions and documentation on using or
+            contributing to Bootstrap.
+          </p>
+          <ul class="icon-list">
+            <li>
+              <a
+                href="https://getbootstrap.com/docs/4.6/getting-started/introduction"
+                >Bootstrap quick start guide</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://getbootstrap.com/docs/4.6/getting-started/webpack"
+                >Bootstrap Webpack guide</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://getbootstrap.com/docs/4.6/getting-started/build-tools"
+                >Contributing to Bootstrap</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
 
-        <script src="scripts/vendor.js"></script>
+      <hr class="my-5" />
 
-        <script src="scripts/plugins.js"></script>
+      <p class="text-muted">
+        Created and open sourced by the Bootstrap team. Licensed MIT.
+      </p>
+    </div>
 
-        <!-- Async load cross-site CSS, mostly interesting for production -->
-        <script>
-        function loadCSS(e,t,n){"use strict";var i=window.document.createElement("link");var o=t||window.document.getElementsByTagName("script")[0];i.rel="stylesheet";i.href=e;i.media="only x";o.parentNode.insertBefore(i,o);setTimeout(function(){i.media=n||"all"})}
-        loadCSS('styles/site.css');
-        </script>
-
-
-        <script src="scripts/main.js"></script>
-<script>
-(function(d,u){for (var i in u) {var l=d.createElement('link');l.type='text/css';l.rel='stylesheet';l.href=u[i]; d.getElementsByTagName('head')[0].appendChild(l);}}(document,['styles/main.css']));
-</script>
-</body>
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
+      integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI="
+      crossorigin="anonymous"
+    ></script>
+    <script type="module" src="assets/js/starter.js"></script>
+    <noscript><link rel="stylesheet" href="/uncritical.css"></noscript>
+  </body>
 </html>

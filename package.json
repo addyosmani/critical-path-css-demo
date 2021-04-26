@@ -1,34 +1,15 @@
 {
-  "name": "development",
+  "name": "criticalcss_gulp_demo",
   "version": "0.0.0",
-  "dependencies": {},
+  "description": "",
+  "main": "index.html",
   "devDependencies": {
-    "connect": "^3.0.2",
-    "connect-livereload": "^0.5.4",
-    "critical": "^0.7.0",
-    "gulp": "^3.6.0",
-    "gulp-autoprefixer": "^3.1.0",
-    "gulp-cache": "^0.4.1",
-    "gulp-clean": "^0.3.1",
-    "gulp-csso": "^1.0.1",
-    "gulp-filter": "^3.0.1",
-    "gulp-flatten": "^0.2.0",
-    "gulp-imagemin": "^2.0.0",
-    "gulp-jshint": "*",
-    "gulp-livereload": "^3.8.1",
-    "gulp-load-plugins": "^1.1.0",
-    "gulp-rename": "^1.2.0",
-    "gulp-size": "^2.0.0",
-    "gulp-uglify": "^1.0.0",
-    "gulp-useref": "^3.0.4",
-    "jshint-stylish": "^2.1.0",
-    "main-bower-files": "^2.4.0",
-    "opn": "^3.0.3",
-    "serve-index": "^1.1.4",
-    "serve-static": "^1.4.0",
-    "wiredep": "^3.0.0"
+    "critical": "^2.0.6",
+    "gulp": "^4.0.2",
+    "gulp-imagemin": "^7.1.0",
+    "gulp-terser": "^2.0.1"
   },
-  "engines": {
-    "node": ">=0.10.0"
+  "scripts": {
+    "build": "npm run gulp"
   }
 }

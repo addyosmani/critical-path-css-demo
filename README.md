@@ -106,5 +106,5 @@ for you.
 
 # Credits
 
-- Original example by @addyosmani (2014 - 2017)
-- Updated example by @mor10 (2021)
+- Original example by [@addyosmani](https://github.com/addyosmani) (2014 - 2017)
+- Updated example by [@mor10](https://github.com/mor10) (2021)
